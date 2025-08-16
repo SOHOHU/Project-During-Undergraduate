@@ -1,1 +1,9 @@
+The RLST-KNN method is a machine learning approach specifically designed for the prediction of dairy cow ketosis, with its advantage lying in effectively 
+handling the phenomena of data imbalance and missing data in datasets.
 
+Compared with traditional machine learning detection methods, the RLST-KNN method has demonstrated 
+stronger performance and robustness in imbalanced dairy cow ketosis data.
+
+The relevant paper on this method, 
+*RLST-KNN: An Efficient Machine Learning Method for Prediction of Subclinical Ketosis of Dairy Cows Based on Imbalanced Data Processing Algorithm*, 
+was submitted to the journal *Genetics* in April 2025.
