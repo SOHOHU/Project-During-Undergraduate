@@ -1,7 +1,6 @@
 
 ### Overview of Loyalty-SMOTE Algorithm  
 The Loyalty-SMOTE algorithm is an improved version of the SMOTE algorithm.  
-![Loyalty-SMOTE 算法流程图](C:\Users\哈士奇总动员\Desktop\科创会议记录\论文2\picture\fig.1.png "SMOTE algorithm disturbed by outliers")
 
 ### Core Mechanism  
 It identifies abnormal samples and boundary samples by calculating the Loyalty of each data point, and performs oversampling specifically on the boundary samples.  
