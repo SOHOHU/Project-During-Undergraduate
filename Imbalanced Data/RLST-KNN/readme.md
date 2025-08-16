@@ -3,7 +3,7 @@ Imbalanced data refers to a situation in classification tasks where the number o
 The RLST-KNN method is a machine learning approach specifically designed for the prediction of dairy cow ketosis, with its advantage lying in effectively handling the phenomena of data imbalance and missing data in datasets.  
 
 <p align="center">
-  <img src="Picture/fig1.png" alt="SMOTE algorithm disturbed by outliers" width="70%" />
+  <img src="Picture/Fig1.png" alt="SMOTE algorithm disturbed by outliers" width="40%" />
 </p>
 
 ### Performance Comparison  
