@@ -6,3 +6,5 @@ and performs oversampling specifically on the boundary samples.
 Compared with traditional imbalanced data processing algorithms, 
 the Loyalty-SMOTE algorithm has significantly improved the performance of classifiers, 
 especially on multi-class datasets.
+
+The paper "Loyalty-SMOTE: Data Synthesis Algorithm for Effective Imbalanced Data Classification" was submitted to the journal *Neural Networks* in November 2024.
