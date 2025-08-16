@@ -24,3 +24,5 @@ To select a suitable classifier for dairy cow pain scoring, we also conducted re
 
 ### Nature and Significance of the Method  
 The method of this project is a subjective approach (a concept in veterinary medicine). It has its advantages and disadvantages and can provide important references for the dairy industry.  
+
+
