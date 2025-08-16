@@ -7,4 +7,4 @@ First, I studied imbalanced data handling in dairy cow ketosis prediction, devel
 ### Research Content 2: Proposal of a New Imbalanced Data Processing Algorithm​
 Subsequently, I researched imbalanced data processing algorithms, proposing Loyalty-SMOTE, a new method.​
 
-These findings were submitted to "Preventive Veterinary Medicine" and "Neural Networks" journals, focusing on applying imbalanced data processing in animal disease prediction, providing technical support for precision livestock farming.​
+These findings were submitted to "Theriogenology" and "Neural Networks" journals, focusing on applying imbalanced data processing in animal disease prediction, providing technical support for precision livestock farming.​
