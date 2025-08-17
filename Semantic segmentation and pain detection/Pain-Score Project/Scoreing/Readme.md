@@ -11,7 +11,7 @@ To achieve this, we selected appropriate scoring classifiers through comparative
 ### Calculation Method​
 
 <p align="center">
-  <img src="奶牛疼痛量表.png" alt="Scoring Method" width="70%" />
+  <img src="Picture/Scoring Pipeline.png" alt="Scoring Pipeline" width="70%" />
 </p>
 
 The following figure shows how each part of the dairy cow's face is scored.
