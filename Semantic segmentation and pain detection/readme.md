@@ -12,12 +12,14 @@ Unfortunately, due to time constraints, the paper for this project was not submi
 ### Key Components of the Pain-Score Method  
 As shown in the figure, the Pain-Score method consists of three key parts: a semantic segmentation module, a pain scoring module, and a pain detection module. To achieve fine segmentation of the dairy cow's face, we improved the DeeplabV3+ algorithm and named the new algorithm Pain-Deeplab. To realize accurate and real-time pain scoring for dairy cows, we combined the dairy cow facial pain scale with a deep learning classifier. Finally, based on the above, a simple method was used to implement dairy cow pain detection.  
 
-<p align="center">
-  <img src="Picture/Pain-Deeplab FlowLIne.png" alt="Pain-Deeplab FlowLIne" width="60%" />
-</p>
+
 
 ### Improvements and Performance of Pain-Deeplab  
 As shown in the figure, the Pain-Deeplab method enhances the performance of the DeeplabV3+ algorithm by introducing a channel attention mechanism, a feature fusion module, and a semantic parsing module. We verified the superior performance of Pain-Deeplab in relevant experiments. For complete experimental results, please refer to the draft of my paper.  
+
+<p align="center">
+  <img src="Picture/Pain-Deeplab FlowLIne.png" alt="Pain-Deeplab FlowLIne" width="60%" />
+</p>
 
 
 ### Comparative Experiments for Classifier Selection  
