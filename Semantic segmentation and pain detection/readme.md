@@ -3,6 +3,8 @@
 ### Project Leadership Period and Overview  
 From December 2024 to June 2025, I temporarily led the project "Deep Learning-Based Dairy Cow Pain Detection Method". We proposed a dairy cow pain detection method based on semantic segmentation and the dairy cow facial pain scale, named Pain-Score. To acquire the dairy cow pain dataset, I collected pain data (pain during calving) at a ranch from January 3 to January 18, 2025. Due to confidentiality agreements, the dataset cannot be made public.  
 
+Unfortunately, due to time constraints, the paper for this project was not submitted to the target journal *Animal* before my graduation. After I graduated, the project was handed over to the next cohort of students to continue (the project ownership remains with Northwest A&F University). I can only provide the experiments and paper draft completed by myself, as well as the undergraduate thesis based on this project.
+
 <p align="center">
   <img src="Picture/Pain-Score FlowLIne.png" alt="Pain-Score FlowLIne" width="60%" />
 </p>
