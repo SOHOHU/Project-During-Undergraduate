@@ -128,3 +128,14 @@ img/street.jpg
 ### Reference
 https://github.com/ggyyzm/pytorch_segmentation  
 https://github.com/bonlime/keras-deeplab-v3-plus
+
+
+## Optimization scheme of the Pain-Deeplab algorithm
+### ECA
+The ECA algorithm is applied after ASPP. Since the ASPP module extends the feature layer through feature stacking, this enables the channel attention algorithm to achieve better results.
+
+### FPN
+In Pain-Deeplab, FPN serves as a bridge connecting shallow and deep features. It alleviates the problem of excessive differences between shallow and deep features in the DeeplabV3+ algorithm by further expanding shallow features.
+
+### SSH
+The SSH module is used to enhance the model's ability to restore feature layers to images.
