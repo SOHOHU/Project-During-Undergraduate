@@ -25,6 +25,9 @@ As shown in the figure, the Pain-Deeplab method enhances the performance of the 
 ### Comparative Experiments for Classifier Selection  
 To select a suitable classifier for dairy cow pain scoring, we also conducted relevant comparative experiments.  
 
+<p align="center">
+  <img src="Picture/Scoring Pipeline.png" alt="Pain-Deeplab FlowLIne" width="60%" />
+</p>
 
 ### Nature and Significance of the Method  
 The method of this project is a subjective approach (a concept in veterinary medicine). It has its advantages and disadvantages and can provide important references for the dairy industry.  
