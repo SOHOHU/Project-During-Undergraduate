@@ -6,5 +6,7 @@ The second step of the Pain-Score method is the scoring stage. After segmenting 
 
 To achieve this, we selected appropriate scoring classifiers through comparative experiments to assess the pain levels of each facial organ in dairy cows. The specific experimental results can be referenced in our paper.
 
+All classifiers use open-source code. We would like to express our sincere thanks to BiliBili blogger "霹雳吧啦Wz" for providing the relevant materials.
+https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_classification
 
   
