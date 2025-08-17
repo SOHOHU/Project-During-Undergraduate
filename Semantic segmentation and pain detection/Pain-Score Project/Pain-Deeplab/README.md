@@ -134,8 +134,22 @@ https://github.com/bonlime/keras-deeplab-v3-plus
 ### ECA
 The ECA algorithm is applied after ASPP. Since the ASPP module extends the feature layer through feature stacking, this enables the channel attention algorithm to achieve better results.
 
+<p align="center">
+  <img src="ECA Attention for Feature Refinement.png" alt="ECA" width="70%" />
+</p>
+
+
 ### FPN
 In Pain-Deeplab, FPN serves as a bridge connecting shallow and deep features. It alleviates the problem of excessive differences between shallow and deep features in the DeeplabV3+ algorithm by further expanding shallow features.
 
+<p align="center">
+  <img src="FPN is used for multi-scale feature extraction.png" alt="FPN" width="70%" />
+</p>
+
+
 ### SSH
 The SSH module is used to enhance the model's ability to restore feature layers to images.
+
+<p align="center">
+  <img src="SSH is used for semantic enhancement in the decoder.png" alt="SSH" width="70%" />
+</p>
