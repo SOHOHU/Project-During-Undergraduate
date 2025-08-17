@@ -1,3 +1,7 @@
+
+# This project refers to the Deeplab project provided by bubbliiiing, and the readme of Pain-Deeplab also refers to bubbliiiing. We would like to express our sincere gratitude to bubbliiiing for the teaching videos on deep learning.
+【Pytorch 搭建自己的DeeplabV3+语义分割平台（Bubbliiiing 深度学习 教程）】https://www.bilibili.com/video/BV173411q7xF?vd_source=86f8f34af62990c5228166395ff25ab9
+
 ## DeepLabv3+：Encoder-Decoder with Atrous Separable Convolution语义分割模型在Pytorch当中的实现
 ---
 
