@@ -59,22 +59,22 @@
 
 ### 登录界面
 <p align="center">
-  <img src="Picture/fig.1.png" alt="系统登录界面" width="40%" />
+  <img src="Picture/图片1.png" alt="系统登录界面" width="40%" />
 </p>
 
 ### 知识库管理
 <p align="center">
-  <img src="Picture/fig.2.png" alt="知识库管理界面" width="40%" />
+  <img src="Picture/图片2.png" alt="知识库管理界面" width="40%" />
 </p>
 
 ### 数据可视化（图表）
 <p align="center">
-  <img src="Picture/fig.3.png" alt="统计图表" width="40%" />
+  <img src="Picture/图片4.png" alt="统计图表" width="40%" />
 </p>
 
-### 有害生物识别
+### 有害生物识别混淆矩阵
 <p align="center">
-  <img src="Picture/fig.4.png" alt="生物识别模型" width="40%" />
+  <img src="Picture/图片3.png" alt="生物识别模型" width="40%" />
 </p>
 
 ## 致谢
