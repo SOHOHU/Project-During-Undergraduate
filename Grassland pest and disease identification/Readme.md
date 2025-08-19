@@ -58,16 +58,24 @@
 ## 系统截图
 
 ### 登录界面
-![全国草原有害生物普查系统登录界面](此处可插入登录界面截图)
+<p align="center">
+  <img src="Picture/fig.1.png" alt="系统登录界面" width="40%" />
+</p>
 
 ### 知识库管理
-![有害生物知识库管理界面](此处可插入知识库界面截图)
+<p align="center">
+  <img src="Picture/fig.2.png" alt="知识库管理界面" width="40%" />
+</p>
 
 ### 数据可视化（图表）
-![病害分布统计图表](此处可插入图表可视化截图)
+<p align="center">
+  <img src="Picture/fig.3.png" alt="统计图表" width="40%" />
+</p>
 
 ### 有害生物识别
-![有害生物识别模型展示](此处可插入模型识别相关截图)
+<p align="center">
+  <img src="Picture/fig.4.png" alt="生物识别模型" width="40%" />
+</p>
 
 ## 致谢
 
