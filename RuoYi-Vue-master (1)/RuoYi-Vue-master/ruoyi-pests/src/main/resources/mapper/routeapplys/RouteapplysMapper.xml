@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.routeapplys.mapper.RouteapplysMapper">
+    
+    <resultMap type="Routeapplys" id="RouteapplysResult">
+        <result property="id"    column="id"    />
+        <result property="administrativeRegion"    column="administrative_region"    />
+        <result property="pointsNum"    column="points_num"    />
+        <result property="progress"    column="progress"    />
+
+        <result property="applicationStatus"    column="application_status"    />
+        <result property="uid"    column="uid"    />
+        <result property="uname"    column="uname"    />
+        <result property="applicationTime"    column="application_time"    />
+
+        <result property="approvalUid"    column="approval_uid"    />
+        <result property="approvalUname"    column="approval_uname"    />
+        <result property="approvalTime"    column="approval_time"    />
+    </resultMap>
+
+    <sql id="selectRouteapplysVo">
+        select id, administrative_region, points_num, progress, application_status, uid, uname, application_time, approval_uid, approval_uname, approval_time from routeview
+    </sql>
+
+    <select id="selectRouteapplysList" parameterType="Routeapplys" resultMap="RouteapplysResult">
+        <include refid="selectRouteapplysVo"/>
+        <where>  
+            <if test="applicationStatus != null "> and application_status = #{applicationStatus}</if>
+            <if test="approvalUname != null  and approvalUname != ''"> and approval_uname like concat('%', #{approvalUname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectRouteapplysById" parameterType="Long" resultMap="RouteapplysResult">
+        <include refid="selectRouteapplysVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertRouteapplys" parameterType="Routeapplys" useGeneratedKeys="true" keyProperty="id">
+<!--        insert into routeapplys-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="applicationStatus != null">application_status,</if>-->
+<!--            <if test="approvalUid != null">approval_uid,</if>-->
+<!--            <if test="approvalUname != null and approvalUname != ''">approval_uname,</if>-->
+<!--            <if test="approvalTime != null">approval_time,</if>-->
+<!--         </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="applicationStatus != null">#{applicationStatus},</if>-->
+<!--            <if test="approvalUid != null">#{approvalUid},</if>-->
+<!--            <if test="approvalUname != null and approvalUname != ''">#{approvalUname},</if>-->
+<!--            <if test="approvalTime != null">#{approvalTime},</if>-->
+<!--         </trim>-->
+        insert into routeapplys( application_status, approval_uid, approval_uname, approval_time)value
+        (#{applicationStatus}, #{approvalUid}, #{approvalUname}, sysdate())
+    </insert>
+
+    <update id="updateRouteapplys" parameterType="Routeapplys">
+<!--        update routeapplys-->
+<!--        <trim prefix="SET" suffixOverrides=",">-->
+<!--            <if test="applicationStatus != null">application_status = #{applicationStatus},</if>-->
+<!--            <if test="approvalUid != null">approval_uid = #{approvalUid},</if>-->
+<!--            <if test="approvalUname != null and approvalUname != ''">approval_uname = #{approvalUname},</if>-->
+<!--            <if test="approvalTime != null">approval_time = #{approvalTime},</if>-->
+<!--        </trim>-->
+<!--        where id = #{id}-->
+        update routeapplys set
+                               application_status = #{applicationStatus},
+                               approval_uid = #{approvalUid},
+                               approval_uname = #{approvalUname},
+                               approval_time = sysdate()
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRouteapplysById" parameterType="Long">
+        delete from routeapplys where id = #{id}
+    </delete>
+
+    <delete id="deleteRouteapplysByIds" parameterType="String">
+        delete from routeapplys where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

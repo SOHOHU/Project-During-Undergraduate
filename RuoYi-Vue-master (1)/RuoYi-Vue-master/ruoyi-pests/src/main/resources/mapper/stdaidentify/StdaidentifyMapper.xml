@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.stdaidentify.mapper.StdaidentifyMapper">
+
+    <resultMap type="Stdaidentify" id="StdaidentifyResult">
+        <result property="id"    column="id"    />
+        <result property="image"    column="image"    />
+        <result property="collectTime"    column="collect_time"    />
+        <result property="surveyUid"    column="survey_uid"    />
+        <result property="surveyUname"    column="survey_uname"    />
+        <result property="administrativeRegion"    column="administrative_region"    />
+        <result property="investigationMethod"    column="investigation_method"    />
+
+        <result property="type"    column="type"    />
+        <result property="name"    column="name"    />
+        <result property="identifyStatus"    column="identify_status"    />
+        <result property="identifyUid"    column="identify_uid"    />
+        <result property="identifyUname"    column="identify_uname"    />
+        <result property="identifyTime"    column="identify_time"    />
+    </resultMap>
+
+    <sql id="selectStdaidentifyVo">
+        --         select id, image, collect_time, survey_uid, survey_uname, administrative_region, investigation_method from stdainvest
+        select id, image, collect_time, survey_uid, survey_uname, administrative_region, investigation_method, type, name, identify_status, identify_uid, identify_uname, identify_time from StdaView
+    </sql>
+
+    <select id="selectStdaidentifyList" parameterType="Stdaidentify" resultMap="StdaidentifyResult">
+        <include refid="selectStdaidentifyVo"/>
+        <where>
+            <if test="surveyUname != null  and surveyUname != ''"> and survey_uname like concat('%', #{surveyUname}, '%')</if>
+            <if test="administrativeRegion != null  and administrativeRegion != ''"> and administrative_region like concat('%', #{administrativeRegion}, '%')</if>
+            <!--            <if test="administrativeRegion != null  and administrativeRegion != ''"> and administrative_region = #{administrativeRegion}</if>-->
+            <if test="investigationMethod != null  and investigationMethod != ''"> and investigation_method = #{investigationMethod}</if>
+
+
+            <if test="type != null "> and type = #{type}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="identifyUname != null  and identifyUname != ''"> and identify_uname like concat('%', #{identifyUname}, '%')</if>
+            <if test="identifyStatus != null "> and identify_status = #{identifyStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectStdaidentifyById" parameterType="Long" resultMap="StdaidentifyResult">
+        <include refid="selectStdaidentifyVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertStdaidentify" parameterType="Stdaidentify" useGeneratedKeys="true" keyProperty="id">
+        insert into stdaidentify(type, name, identify_uid, identify_uname, identify_status, identify_time)value
+            (0, NULL, NULL, NULL, 0, NULL)
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="type != null">type,</if>-->
+<!--            <if test="name != null">name,</if>-->
+<!--            <if test="identifyUid != null">identify_uid,</if>-->
+<!--            <if test="identifyUname != null">identify_uname,</if>-->
+<!--            <if test="identifyStatus != null">identify_status,</if>-->
+<!--            <if test="identifyTime != null">identify_time,</if>-->
+<!--         </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="type != null">#{type},</if>-->
+<!--            <if test="name != null">#{name},</if>-->
+<!--            <if test="identifyUid != null">#{identifyUid},</if>-->
+<!--            <if test="identifyUname != null">#{identifyUname},</if>-->
+<!--            <if test="identifyStatus != null">#{identifyStatus},</if>-->
+<!--            <if test="identifyTime != null">#{identifyTime},</if>-->
+<!--         </trim>-->
+    </insert>
+
+    <update id="updateStdaidentify" parameterType="Stdaidentify">
+        update stdaidentify
+            set type = #{type}, name = #{name}, identify_uid = #{identifyUid}, identify_uname = #{identifyUname}, identify_status = #{identifyStatus}, identify_time = sysdate()
+<!--        <trim prefix="SET" suffixOverrides=",">-->
+<!--            <if test="type != null">type = #{type},</if>-->
+<!--            <if test="name != null">name = #{name},</if>-->
+<!--            <if test="identifyUid != null">identify_uid = #{identifyUid},</if>-->
+<!--            <if test="identifyUname != null">identify_uname = #{identifyUname},</if>-->
+<!--            <if test="identifyStatus != null">identify_status = #{identifyStatus},</if>-->
+<!--            <if test="identifyTime != null">identify_time = #{identifyTime},</if>-->
+<!--        </trim>-->
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStdaidentifyById" parameterType="Long">
+        delete from stdaidentify where id = #{id}
+    </delete>
+
+    <delete id="deleteStdaidentifyByIds" parameterType="String">
+        delete from stdaidentify where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.pointsreport.mapper.PointsreportMapper">
+    
+    <resultMap type="Pointsreport" id="PointsreportResult">
+        <result property="id"    column="id"    />
+        <result property="routeId"    column="route_id"   />
+        <result property="administrativeRegion"    column="administrative_region"    />
+        <result property="detailLocation"    column="detail_location"    />
+        <result property="reportStatus"    column="report_status"    />
+        <result property="image"    column="image"    />
+        <result property="reportTime"    column="report_time"    />
+        <result property="uid"    column="uid"    />
+        <result property="uname"    column="uname"    />
+    </resultMap>
+
+    <sql id="selectPointsreportVo">
+        select id, route_id, administrative_region, detail_location, report_status, image, report_time, uid, uname from pointsview
+    </sql>
+
+    <select id="selectPointsreportList" parameterType="Pointsreport" resultMap="PointsreportResult">
+        <include refid="selectPointsreportVo"/>
+        <where>  
+            <if test="reportStatus != null "> and report_status = #{reportStatus}</if>
+            <if test="uname != null  and uname != ''"> and uname like concat('%', #{uname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectPointsreportById" parameterType="Long" resultMap="PointsreportResult">
+        <include refid="selectPointsreportVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPointsreport" parameterType="Pointsreport" useGeneratedKeys="true" keyProperty="id">
+<!--        insert into pointsreport-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="reportStatus != null">report_status,</if>-->
+<!--            <if test="image != null and image != ''">image,</if>-->
+<!--            <if test="reportTime != null">report_time,</if>-->
+<!--            <if test="uid != null">uid,</if>-->
+<!--            <if test="uname != null and uname != ''">uname,</if>-->
+<!--         </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="reportStatus != null">#{reportStatus},</if>-->
+<!--            <if test="image != null and image != ''">#{image},</if>-->
+<!--            <if test="reportTime != null">#{reportTime},</if>-->
+<!--            <if test="uid != null">#{uid},</if>-->
+<!--            <if test="uname != null and uname != ''">#{uname},</if>-->
+<!--         </trim>-->
+        insert into pointsreport( report_status, image, report_time, uid, uname)value
+        (#{reportStatus}, #{image}, sysdate(), #{uid}, #{uname})
+    </insert>
+
+    <update id="updatePointsreport" parameterType="Pointsreport">
+<!--        update pointsreport-->
+<!--        <trim prefix="SET" suffixOverrides=",">-->
+<!--            <if test="reportStatus != null">report_status = #{reportStatus},</if>-->
+<!--            <if test="image != null and image != ''">image = #{image},</if>-->
+<!--            <if test="reportTime != null">report_time = #{reportTime},</if>-->
+<!--            <if test="uid != null">uid = #{uid},</if>-->
+<!--            <if test="uname != null and uname != ''">uname = #{uname},</if>-->
+<!--        </trim>-->
+<!--        where id = #{id}-->
+        update pointsreport set
+                               report_status = #{reportStatus},
+                               image = #{image},
+                               report_time = sysdate(),
+                               uid = #{uid},
+                               uname = #{uname}
+        where id = #{id}
+    </update>
+
+    <delete id="deletePointsreportById" parameterType="Long">
+        delete from pointsreport where id = #{id}
+    </delete>
+
+    <delete id="deletePointsreportByIds" parameterType="String">
+        delete from pointsreport where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

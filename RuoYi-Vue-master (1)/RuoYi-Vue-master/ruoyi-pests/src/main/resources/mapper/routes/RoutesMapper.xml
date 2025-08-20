@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.routes.mapper.RoutesMapper">
+    
+    <resultMap type="Routes" id="RoutesResult">
+        <result property="id"    column="id"    />
+        <result property="administrativeRegion"    column="administrative_region"    />
+        <result property="pointsNum"    column="points_num"    />
+        <result property="progress"    column="progress"    />
+
+        <result property="applicationStatus"    column="application_status"    />
+        <result property="uid"    column="uid"    />
+        <result property="uname"    column="uname"    />
+        <result property="applicationTime"    column="application_time"    />
+
+        <result property="approvalUid"    column="approval_uid"    />
+        <result property="approvalUname"    column="approval_uname"    />
+        <result property="approvalTime"    column="approval_time"    />
+    </resultMap>
+
+    <resultMap id="RoutesSurveypointsResult" type="Routes" extends="RoutesResult">
+        <collection property="surveypointsList" ofType="Surveypoints" column="id" select="selectSurveypointsList" />
+    </resultMap>
+
+    <resultMap type="Surveypoints" id="SurveypointsResult">
+        <result property="id"    column="id"    />
+        <result property="routeId"    column="route_id"    />
+        <result property="detailLocation"    column="detail_location"    />
+    </resultMap>
+
+    <sql id="selectRoutesVo">
+        select id, administrative_region, points_num, progress, application_status, uid, uname, application_time, approval_uid, approval_uname, approval_time from routeview
+    </sql>
+
+    <select id="selectRoutesList" parameterType="Routes" resultMap="RoutesResult">
+        <include refid="selectRoutesVo"/>
+        <where>  
+            <if test="administrativeRegion != null  and administrativeRegion != ''"> and administrative_region like concat('%', #{administrativeRegion}, '%')</if>
+            <if test="pointsNum != null "> and points_num = #{pointsNum}</if>
+            <if test="uname != null  and uname != ''"> and uname like concat('%', #{uname}, '%')</if>
+
+            <if test="applicationStatus != null "> and application_status = #{applicationStatus}</if>
+            <if test="approvalUname != null  and approvalUname != ''"> and approval_uname like concat('%', #{approvalUname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectRoutesById" parameterType="Long" resultMap="RoutesSurveypointsResult">
+        select id, administrative_region, points_num, progress, uid, uname, application_time
+        from routes
+        where id = #{id}
+    </select>
+
+    <select id="selectSurveypointsList" resultType="Surveypoints" resultMap="SurveypointsResult">
+        select id, route_id, detail_location
+        from surveypoints
+        where route_id = #{route_id}
+    </select>
+
+    <insert id="insertRoutes" parameterType="Routes" useGeneratedKeys="true" keyProperty="id">
+<!--        insert into routes-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="administrativeRegion != null and administrativeRegion != ''">administrative_region,</if>-->
+<!--            <if test="pointsNum != null">points_num,</if>-->
+<!--            <if test="progress != null">progress,</if>-->
+<!--            <if test="uid != null">uid,</if>-->
+<!--            <if test="uname != null and uname != ''">uname,</if>-->
+<!--            <if test="applicationTime != null">application_time,</if>-->
+<!--         </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="administrativeRegion != null and administrativeRegion != ''">#{administrativeRegion},</if>-->
+<!--            <if test="pointsNum != null">#{pointsNum},</if>-->
+<!--            <if test="progress != null">#{progress},</if>-->
+<!--            <if test="uid != null">#{uid},</if>-->
+<!--            <if test="uname != null and uname != ''">#{uname},</if>-->
+<!--            <if test="applicationTime != null">sysdate(),</if>-->
+<!--         </trim>-->
+        insert into routes( administrative_region, points_num, progress, uid, uname, application_time)value
+        (#{administrativeRegion}, #{pointsNum}, #{progress}, #{uid}, #{uname}, sysdate())
+    </insert>
+
+    <update id="updateRoutes" parameterType="Routes">
+<!--        update routes-->
+<!--        <trim prefix="SET" suffixOverrides=",">-->
+<!--            <if test="administrativeRegion != null and administrativeRegion != ''">administrative_region = #{administrativeRegion},</if>-->
+<!--            <if test="pointsNum != null">points_num = #{pointsNum},</if>-->
+<!--            <if test="progress != null">progress = #{progress},</if>-->
+<!--            <if test="uid != null">uid = #{uid},</if>-->
+<!--            <if test="uname != null and uname != ''">uname = #{uname},</if>-->
+<!--            <if test="applicationTime != null">application_time = #{applicationTime},</if>-->
+<!--        </trim>-->
+<!--        where id = #{id}-->
+        update routes set
+                          administrative_region = #{administrativeRegion},
+                          points_num = #{pointsNum},
+                          progress = #{progress},
+                          uid = #{uid},
+                          uname = #{uname},
+                          application_time = sysdate()
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRoutesById" parameterType="Long">
+        delete from routes where id = #{id}
+    </delete>
+
+    <delete id="deleteRoutesByIds" parameterType="String">
+        delete from routes where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteSurveypointsByRouteIds" parameterType="String">
+        delete from surveypoints where route_id in 
+        <foreach item="routeId" collection="array" open="(" separator="," close=")">
+            #{routeId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteSurveypointsByRouteId" parameterType="Long">
+        delete from surveypoints where route_id = #{routeId}
+    </delete>
+
+    <insert id="batchSurveypoints">
+        insert into surveypoints( id, route_id, detail_location) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.id}, #{item.routeId}, #{item.detailLocation})
+        </foreach>
+    </insert>
+</mapper>

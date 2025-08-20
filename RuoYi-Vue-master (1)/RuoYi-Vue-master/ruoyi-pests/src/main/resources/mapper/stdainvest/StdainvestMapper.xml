@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.stdainvest.mapper.StdainvestMapper">
+    
+    <resultMap type="Stdainvest" id="StdainvestResult">
+        <result property="id"    column="id"    />
+        <result property="image"    column="image"    />
+        <result property="collectTime"    column="collect_time"    />
+        <result property="surveyUid"    column="survey_uid"    />
+        <result property="surveyUname"    column="survey_uname"    />
+        <result property="administrativeRegion"    column="administrative_region"    />
+        <result property="investigationMethod"    column="investigation_method"    />
+
+        <result property="type"    column="type"    />
+        <result property="name"    column="name"    />
+        <result property="identifyStatus"    column="identify_status"    />
+        <result property="identifyUid"    column="identify_uid"    />
+        <result property="identifyUname"    column="identify_uname"    />
+        <result property="identifyTime"    column="identify_time"    />
+    </resultMap>
+
+    <sql id="selectStdainvestVo">
+--         select id, image, collect_time, survey_uid, survey_uname, administrative_region, investigation_method from stdainvest
+        select id, image, collect_time, survey_uname, administrative_region, investigation_method, type, name, identify_status, identify_uname, identify_time from StdaView
+    </sql>
+
+
+    <select id="selectStdainvestList" parameterType="Stdainvest" resultMap="StdainvestResult">
+        <include refid="selectStdainvestVo"/>
+        <where>  
+            <if test="surveyUname != null  and surveyUname != ''"> and survey_uname like concat('%', #{surveyUname}, '%')</if>
+            <if test="administrativeRegion != null  and administrativeRegion != ''"> and administrative_region like concat('%', #{administrativeRegion}, '%')</if>
+<!--            <if test="administrativeRegion != null  and administrativeRegion != ''"> and administrative_region = #{administrativeRegion}</if>-->
+            <if test="investigationMethod != null  and investigationMethod != ''"> and investigation_method = #{investigationMethod}</if>
+
+            <if test="type != null "> and type = #{type}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="identifyUname != null  and identifyUname != ''"> and identify_uname like concat('%', #{identifyUname}, '%')</if>
+            <if test="identifyStatus != null "> and identify_status = #{identifyStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectStdainvestById" parameterType="Long" resultMap="StdainvestResult">
+        <include refid="selectStdainvestVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertStdainvest" parameterType="Stdainvest" useGeneratedKeys="true" keyProperty="id">
+        insert into stdainvest(image, collect_time, survey_uid, survey_uname, administrative_region, investigation_method)value
+        (#{image}, sysdate(), #{surveyUid}, #{surveyUname}, #{administrativeRegion}, #{investigationMethod})
+    </insert>
+
+    <update id="updateStdainvest" parameterType="Stdainvest">
+        update stdainvest
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="image != null">image = #{image},</if>
+            <if test="collectTime != null">collect_time = #{collectTime},</if>
+            <if test="surveyUid != null">survey_uid = #{surveyUid},</if>
+            <if test="surveyUname != null and surveyUname != ''">survey_uname = #{surveyUname},</if>
+            <if test="administrativeRegion != null and administrativeRegion != ''">administrative_region = #{administrativeRegion},</if>
+            <if test="investigationMethod != null and investigationMethod != ''">investigation_method = #{investigationMethod},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStdainvestById" parameterType="Long">
+        delete from stdainvest where id = #{id}
+    </delete>
+
+    <delete id="deleteStdainvestByIds" parameterType="String">
+        delete from stdainvest where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

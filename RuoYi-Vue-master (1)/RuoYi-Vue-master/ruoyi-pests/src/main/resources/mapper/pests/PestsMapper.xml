@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.pests.mapper.PestsMapper">
+    
+    <resultMap type="Pests" id="PestsResult">
+        <result property="id"    column="id"    />
+        <result property="image"    column="image"    />
+        <result property="type"    column="type"    />
+        <result property="name"    column="name"    />
+        <result property="latinName"    column="latin_name"    />
+        <result property="order"    column="order"    />
+        <result property="family"    column="family"    />
+        <result property="info"    column="info"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPestsVo">
+        select id, image, type, name, latin_name, `order`, `family`, info, update_time from pests
+    </sql>
+
+    <select id="selectPestsList" parameterType="Pests" resultMap="PestsResult">
+        <include refid="selectPestsVo"/>
+        <where>  
+            <if test="type != null "> and type = #{type}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="latinName != null  and latinName != ''"> and latin_name like concat('%', #{latinName}, '%')</if>
+            <if test="order != null  and order != ''"> and `order` = #{order}</if>
+            <if test="family != null  and family != ''"> and `family` = #{family}</if>
+        </where>
+    </select>
+    
+    <select id="selectPestsById" parameterType="Long" resultMap="PestsResult">
+        <include refid="selectPestsVo"/>
+        where id = #{id}
+    </select>
+    <select id="getCountnumber" resultType="com.ruoyi.pests.bo.radder">
+        SELECT type, COUNT(DISTINCT `order`) AS VALUE1, COUNT(DISTINCT family) AS VALUE2, COUNT(DISTINCT type) AS VALUE3, COUNT(DISTINCT name) AS VALUE4
+        FROM pests
+        GROUP BY type
+    </select>
+    <select id="getCounttype" resultType="com.ruoyi.pests.bo.pie">
+        SELECT `order`,  COUNT(`order`) AS VALUE
+        FROM pests
+        WHERE name IS NOT NULL
+        GROUP BY `order`
+    </select>
+    <select id="getCountNature" resultType="com.ruoyi.pests.bo.table">
+        SELECT `order`,  COUNT(`order`) AS VALUE
+        FROM pests
+        WHERE name IS NOT NULL
+        GROUP BY `order`
+    </select>
+    <select id="getCounttime" resultType="com.ruoyi.pests.bo.line">
+        SELECT DATE_FORMAT(update_time, '%m-%d') AS TIME, COUNT(update_time) AS VALUE
+        FROM pests
+        GROUP BY update_time
+        ORDER BY update_time DESC
+        LIMIT 7
+    </select>
+
+    <insert id="insertPests" parameterType="Pests" useGeneratedKeys="true" keyProperty="id">
+        insert into pests(image, type, name, latin_name, `order`, `family`, info, update_time)value
+            (#{image}, #{type}, #{name}, #{latinName}, #{order}, #{family}, #{info}, sysdate())
+    </insert>
+
+    <update id="updatePests" parameterType="Pests">
+        update pests
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="image != null">image = #{image},</if>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="name != null and name != ''">`name` = #{name},</if>
+            <if test="latinName != null">latin_name = #{latinName},</if>
+            <if test="order != null">`order` = #{order},</if>
+            <if test="family != null">`family` = #{family},</if>
+            <if test="info != null">info = #{info},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePestsById" parameterType="Long">
+        delete from pests where id = #{id}
+    </delete>
+
+    <delete id="deletePestsByIds" parameterType="String">
+        delete from pests where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
