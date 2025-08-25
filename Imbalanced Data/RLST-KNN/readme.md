@@ -19,4 +19,4 @@ The RF-LOF method is a new missing value imputation method proposed by us, which
 Compared with traditional machine learning detection methods, the RLST-KNN method has demonstrated stronger performance and robustness in imbalanced dairy cow ketosis data.  Please refer to our paper for the complete experimental results.
 
 ### Related Publication  
-The relevant paper on this method, *RLST-KNN: An Efficient Machine Learning Method for Prediction of Subclinical Ketosis of Dairy Cows Based on Imbalanced Data Processing Algorithm*, was submitted to the journal *Theriogenology* in April 2025. We have made the code of the RL-LOF algorithm publicly available; however, the dataset remains confidential.
+The relevant paper on this method, *RLST-KNN: An Efficient Machine Learning Method for Prediction of Subclinical Ketosis of Dairy Cows Based on Imbalanced Data Processing Algorithm*, was submitted to the journal *Computers and Electronics in Agriculture* in January 2025. We have made the code of the RL-LOF algorithm publicly available; however, the dataset remains confidential.
